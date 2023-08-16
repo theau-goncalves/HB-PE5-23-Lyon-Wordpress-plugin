@@ -26,7 +26,17 @@ class HbPostGenerator
 
     public static function generatePost()
     {
-        dump($_POST);
-        die;
+        if(!empty($_POST['post-count'])) {
+            for ($i = 0; $i < $_POST['post-count']; $i++) {
+                wp_insert_post([
+                    'post_type' => 'post',
+                    'post_title' => "Post" . uniqid(),
+                    'post_content' => '',
+                    'post_status' => 'publish'
+                ]);
+            }
+        }
+
+        wp_redirect($_SERVER['HTTP_REFERER']);
     }
 }
