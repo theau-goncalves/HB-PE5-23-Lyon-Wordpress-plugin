@@ -11,3 +11,9 @@
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       hb-post-generator
  */
+
+require_once 'vendor/autoload.php';
+
+use HbPostGenerator\HbPostGenerator;
+
+HbPostGenerator::init();
