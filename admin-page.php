@@ -2,6 +2,17 @@
     Générateur de post
 </h1>
 
+<?php if (!empty($_GET['status'])): ?>
+
+    <?php if ($_GET['status'] === 'success'): ?>
+        <div style="color: green">
+            Vos articles ont bien été ajoutés
+        </div>
+    <?php endif; ?>
+
+<?php endif; ?>
+
+
 <form action="<?php echo admin_url('admin.php'); ?>" method="post">
     <input type="hidden" name="action" value="hb_generate_post">
 

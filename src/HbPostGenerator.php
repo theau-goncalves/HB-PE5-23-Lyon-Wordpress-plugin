@@ -35,8 +35,13 @@ class HbPostGenerator
                     'post_status' => 'publish'
                 ]);
             }
+
+            wp_redirect($_SERVER['HTTP_REFERER'] . "&status=success");
+
+        } else {
+            wp_redirect($_SERVER['HTTP_REFERER']);
         }
 
-        wp_redirect($_SERVER['HTTP_REFERER']);
+        exit();
     }
 }
