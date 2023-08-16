@@ -1,0 +1,21 @@
+.hb-plugin-container {
+    padding: 2rem;
+}
+
+.hb-plugin-container .alert {
+    padding: 2rem 1rem;
+    background: #dddddd;
+    font-weight: bold;
+    color: black;
+    margin: 1rem 0;
+}
+
+.hb-plugin-container .alert.success {
+    background: #41a241;
+    color: white;
+}
+
+.hb-plugin-container .alert.error {
+    background: #ff3e3e;
+    color: white;
+}

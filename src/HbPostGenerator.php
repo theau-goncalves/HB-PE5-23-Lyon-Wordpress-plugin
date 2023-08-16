@@ -1,6 +1,8 @@
 <?php
 
 namespace HbPostGenerator;
+
+use Faker\Factory;
 class HbPostGenerator
 {
 
@@ -8,6 +10,7 @@ class HbPostGenerator
     {
         add_action( 'admin_menu', [self::class, 'addCustomMenuItem']);
         add_action('admin_action_hb_generate_post', [self::class, 'generatePosts']);
+        add_action('admin_enqueue_scripts', [self::class, 'addAdminStyle']);
     }
 
 
@@ -26,6 +29,9 @@ class HbPostGenerator
 
     public static function generatePosts()
     {
+
+        $faker = Factory::create();
+
         if(!empty($_POST['post-count'])) {
 
             if($_POST['post-count'] < 1 || $_POST['post-count'] > 100) {
@@ -36,7 +42,7 @@ class HbPostGenerator
             for ($i = 0; $i < $_POST['post-count']; $i++) {
                 wp_insert_post([
                     'post_type' => 'post',
-                    'post_title' => "Post" . uniqid(),
+                    'post_title' => $faker->sentence,
                     'post_content' => '',
                     'post_status' => 'publish'
                 ]);
@@ -49,5 +55,9 @@ class HbPostGenerator
         }
 
         exit();
+    }
+
+    public static function addAdminStyle() {
+        wp_enqueue_style('hb-admin-styles',plugin_dir_url( __DIR__ ) .'assets/css/style.css');
     }
 }
