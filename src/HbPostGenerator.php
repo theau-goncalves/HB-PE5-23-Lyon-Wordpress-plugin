@@ -7,7 +7,7 @@ class HbPostGenerator
     public static function init(): void
     {
         add_action( 'admin_menu', [self::class, 'addCustomMenuItem']);
-        add_action('admin_action_hb_generate_post', [self::class, 'generatePost']);
+        add_action('admin_action_hb_generate_post', [self::class, 'generatePosts']);
     }
 
 
@@ -24,9 +24,15 @@ class HbPostGenerator
         );
     }
 
-    public static function generatePost()
+    public static function generatePosts()
     {
         if(!empty($_POST['post-count'])) {
+
+            if($_POST['post-count'] < 1 || $_POST['post-count'] > 100) {
+                wp_redirect($_SERVER['HTTP_REFERER'] . "&status=error&error_type=incorrect_values");
+                exit();
+            }
+
             for ($i = 0; $i < $_POST['post-count']; $i++) {
                 wp_insert_post([
                     'post_type' => 'post',
@@ -39,7 +45,7 @@ class HbPostGenerator
             wp_redirect($_SERVER['HTTP_REFERER'] . "&status=success");
 
         } else {
-            wp_redirect($_SERVER['HTTP_REFERER']);
+            wp_redirect($_SERVER['HTTP_REFERER'] . '&status=error');
         }
 
         exit();
