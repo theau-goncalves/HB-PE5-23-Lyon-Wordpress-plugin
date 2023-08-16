@@ -12,8 +12,8 @@
  * Text Domain:       hb-post-generator
  */
 
-require_once 'vendor/autoload.php';
-
 use HbPostGenerator\HbPostGenerator;
+
+require_once 'vendor/autoload.php';
 
 HbPostGenerator::init();
