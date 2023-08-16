@@ -16,6 +16,7 @@
         "symfony/var-dumper": "^6.3"
     },
     "require": {
+        "php": ">=7.4.0",
         "fakerphp/faker": "^1.23"
     }
 }
